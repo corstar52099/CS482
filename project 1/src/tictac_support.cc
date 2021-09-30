@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>      // std::setw
-
 int load_board( std::string filename, int board[][3] )
 {
 	std::ifstream bfile( filename.c_str() );
@@ -33,6 +32,7 @@ int load_board( std::string filename, int board[][3] )
 
 int save_board( std::string filename, int board[][3] )
 {
+	//std::cout << "Gets here" << std::endl;
 	std::ofstream bfile( filename.c_str() );
 	if( bfile.is_open() )
 	{

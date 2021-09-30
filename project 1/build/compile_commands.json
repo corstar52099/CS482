@@ -1,0 +1,17 @@
+[
+{
+  "directory": "C:/Users/corst/Desktop/Fall 2021/CS482/project 1/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/tictactoe.dir/includes_CXX.rsp -g -o CMakeFiles/tictactoe.dir/src/tictac.cc.obj -c \"C:/Users/corst/Desktop/Fall 2021/CS482/project 1/src/tictac.cc\"",
+  "file": "C:/Users/corst/Desktop/Fall 2021/CS482/project 1/src/tictac.cc"
+},
+{
+  "directory": "C:/Users/corst/Desktop/Fall 2021/CS482/project 1/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/tictactoe.dir/includes_CXX.rsp -g -o CMakeFiles/tictactoe.dir/src/tictac_support.cc.obj -c \"C:/Users/corst/Desktop/Fall 2021/CS482/project 1/src/tictac_support.cc\"",
+  "file": "C:/Users/corst/Desktop/Fall 2021/CS482/project 1/src/tictac_support.cc"
+},
+{
+  "directory": "C:/Users/corst/Desktop/Fall 2021/CS482/project 1/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/tictactoe.dir/includes_CXX.rsp -g -o CMakeFiles/tictactoe.dir/src/tictac_turnin.cc.obj -c \"C:/Users/corst/Desktop/Fall 2021/CS482/project 1/src/tictac_turnin.cc\"",
+  "file": "C:/Users/corst/Desktop/Fall 2021/CS482/project 1/src/tictac_turnin.cc"
+}
+]

@@ -1,6 +1,6 @@
 #ifndef _TICTAC_SUPPORT_H_
 #define _TICTAC_SUPPORT_H_
-
+#include <iostream>
 #include <string>
 
 /**
@@ -59,5 +59,6 @@ int save_board( std::string filename, int board[][3] );
 **/
 
 int make_move( int board[][3] );
+
 
 #endif

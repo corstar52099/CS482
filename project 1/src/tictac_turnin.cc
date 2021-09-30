@@ -1,11 +1,14 @@
 #include <tictac_support.h>
 #include <iostream>
-
-//protopes
+std::pair<int,int> bestMove(int [][3], bool, long&);
+int minimax (int [][3], int, bool, long&);
+int checkwinner(int [][3]);
+bool ismovesLeft(int [][3]);
 int min (int score, int test){return (score<test)?score:test;}
 int max (int score, int test){return (score>test)?score:test;}
-std::pair<int,int> bestMove(int [][3], bool);
-int minimax (int [][3], int, bool);
+void printBoard(int board[][3]);
+//protopes
+
 //end prototypes
 
 /**
@@ -24,23 +27,25 @@ int minimax (int [][3], int, bool);
 		the number of steps it took to choose the best move
 		(current implementation returns 1 by default, 0 if no move made)
 **/
-
 int make_move( int board[][3] )
 {
+
 	std::pair<int,int> move;
-	int* numsteps;
-	*numsteps = 1;
-	move = bestMove(board, false, numsteps);
+	long num_steps = 0;
+	move = bestMove(board, false, num_steps);
+	std::cout << "Best move is board[" << move.first << "][" << move.second << "]";
+	std::cout << std::endl << "num_steps: " << num_steps;
 	if(move.first == 3){
 		return 0;
 	}
+	std::cout << "board before turn: " << std::endl;
+	printBoard(board);
     board[move.first][move.second] = -1;
-	return *numsteps;
+	std::cout << "board after turn: " << std::endl;
+	printBoard(board);
+	return 0;
 }
-
-
-std::pair<int,int> bestMove(int board[][3], bool minmax, int* numsteps){
-
+std::pair<int,int> bestMove(int board[][3], bool minmax, long& numsteps){
     std::pair<int, int> bestIndecies;
     bestIndecies.first = 3;
     bestIndecies.second = 3;
@@ -48,11 +53,12 @@ std::pair<int,int> bestMove(int board[][3], bool minmax, int* numsteps){
     int bestscore = 0;
     for (int i = 0; i < 3; i++){
         for(int k = 0; k < 3; k++){
+			
             if(board[i][k] == 0){
                 if(minmax){
                     //do move
                     board[i][k] = 1;
-					*numsteps++;
+					numsteps++;
                     //get score of that move
                     score = minimax(board, 0, false, numsteps);
 
@@ -69,7 +75,7 @@ std::pair<int,int> bestMove(int board[][3], bool minmax, int* numsteps){
                 else{
                     //do move
                     board[i][k] = -1;
-					*numsteps++;
+					numsteps++;
                     //get score of that move 
                     score = minimax(board, 0, true, numsteps);
 
@@ -89,8 +95,8 @@ std::pair<int,int> bestMove(int board[][3], bool minmax, int* numsteps){
     return bestIndecies;
 }
 //implements the minimax algorithm
-int minimax (int board[][3], int depth, bool minmax, int* numsteps){
-
+int minimax (int board[][3], int depth, bool minmax, long& numsteps){
+	//std::cout << "is looping";
     //set the score to to the value of checkwinner
     int score = checkwinner(board);
     if(score != 0){
@@ -105,7 +111,7 @@ int minimax (int board[][3], int depth, bool minmax, int* numsteps){
                 if(board[i][k] == 0){
                     //do move
                     board[i][k] = 1;
-					*numsteps++;
+					numsteps++;
                     //maxamizng score
                     score = max(score, minimax(board, depth + 1, false, numsteps));
                     
@@ -121,7 +127,7 @@ int minimax (int board[][3], int depth, bool minmax, int* numsteps){
                 if(board[i][k] == 0){
                     //do move
                     board[i][k] = -1;
-					*numsteps++;
+					numsteps++;
                     //minimizing score
                     score = min(score, minimax(board, depth + 1, true, numsteps));
 
@@ -200,3 +206,4 @@ void printBoard(int board[][3]){
     }
      std::cout << "----------" << std::endl;
 }
+
