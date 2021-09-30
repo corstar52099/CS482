@@ -1,5 +1,7 @@
 # CS482
 Artificial intelligence 
+
+
 This project uses the Minimax algorithm to implement a smart tictactoe AI player
 The program is currently designed to only run for one singular turn for a predetermined game state. 
 That game state is a txt file contained within the SRC directory. The game state has a specific format
