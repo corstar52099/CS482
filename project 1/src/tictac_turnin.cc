@@ -32,16 +32,21 @@ int make_move( int board[][3] )
 
 	std::pair<int,int> move;
 	long num_steps = 0;
+    //find the best move
 	move = bestMove(board, false, num_steps);
-	std::cout << "Best move is board[" << move.first << "][" << move.second << "]";
-	std::cout << std::endl << "num_steps: " << num_steps;
 	if(move.first == 3){
 		return 0;
 	}
-	std::cout << "board before turn: " << std::endl;
+
+    //printing the board to the console before the move is made
+	std::cout << "board before move: " << std::endl;
 	printBoard(board);
+
+    //actually make the move that is found
     board[move.first][move.second] = -1;
-	std::cout << "board after turn: " << std::endl;
+
+    //print the board after the move is made
+	std::cout << "board after move: " << std::endl;
 	printBoard(board);
 	return 0;
 }
@@ -51,14 +56,16 @@ std::pair<int,int> bestMove(int board[][3], bool minmax, long& numsteps){
     bestIndecies.second = 3;
     int score = 0;
     int bestscore = 0;
+    //traverse the board searching for moves
     for (int i = 0; i < 3; i++){
         for(int k = 0; k < 3; k++){
-			
             if(board[i][k] == 0){
+                //if its maxamizing
                 if(minmax){
                     //do move
                     board[i][k] = 1;
 					numsteps++;
+
                     //get score of that move
                     score = minimax(board, 0, false, numsteps);
 
@@ -72,10 +79,12 @@ std::pair<int,int> bestMove(int board[][3], bool minmax, long& numsteps){
                         bestIndecies.second=k;
                     }
                 }
+                //if its minimizing
                 else{
                     //do move
                     board[i][k] = -1;
 					numsteps++;
+
                     //get score of that move 
                     score = minimax(board, 0, true, numsteps);
 
@@ -96,7 +105,7 @@ std::pair<int,int> bestMove(int board[][3], bool minmax, long& numsteps){
 }
 //implements the minimax algorithm
 int minimax (int board[][3], int depth, bool minmax, long& numsteps){
-	//std::cout << "is looping";
+
     //set the score to to the value of checkwinner
     int score = checkwinner(board);
     if(score != 0){
@@ -175,6 +184,8 @@ int checkwinner(int board[][3]){
     }
     return 0;   
 }
+
+//checks if the game is over
 bool ismovesLeft(int board[][3]){
     for (int i = 0; i < 3; i++){
         for(int j = 0; j < 2; j++){
