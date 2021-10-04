@@ -32,23 +32,27 @@ int make_move( int board[][3] )
 
 	std::pair<int,int> move;
 	long num_steps = 0;
-    //find the best move
-	move = bestMove(board, false, num_steps);
-	if(move.first == 3){
-		return 0;
-	}
 
     //printing the board to the console before the move is made
 	std::cout << "board before move: " << std::endl;
 	printBoard(board);
 
+    //find the best move
+	move = bestMove(board, false, num_steps);
+
+
+    //exit if the game is over
+    if(!ismovesLeft(board) || (checkwinner(board) != 0)){
+        std::cout << "No moves can be made, the game is over" << std::endl;
+        return 0;
+    }
     //actually make the move that is found
     board[move.first][move.second] = -1;
 
     //print the board after the move is made
-	std::cout << "board after move: " << std::endl;
+	std::cout << "board after move (" << num_steps << " steps):" << std::endl;
 	printBoard(board);
-	return 0;
+	return 1;
 }
 std::pair<int,int> bestMove(int board[][3], bool minmax, long& numsteps){
     std::pair<int, int> bestIndecies;
@@ -56,6 +60,12 @@ std::pair<int,int> bestMove(int board[][3], bool minmax, long& numsteps){
     bestIndecies.second = 3;
     int score = 0;
     int bestscore = 0;
+
+    //case to do nothing if the game is over
+    if(!ismovesLeft(board) || (checkwinner(board) != 0)){
+        return bestIndecies;
+    }
+
     //traverse the board searching for moves
     for (int i = 0; i < 3; i++){
         for(int k = 0; k < 3; k++){
